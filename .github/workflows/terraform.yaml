@@ -1,0 +1,28 @@
+name: Provision Roboshop Infrastructure
+on: [workflow_dispatch]
+jobs: 
+  DEV:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      -  name: terraform init 
+         run: terraform init -backend-config=env-dev/state.tfvars 
+  QA: 
+    runs-on: ubuntu-latest
+    needs: DEV
+    steps:
+      - uses: echo just a dummy job     
+
+  UAT:
+    runs-on: ubuntu-latest
+    needs: QA
+    steps:
+      - uses: echo just a dummy job
+      
+  PROD:
+    runs-on: self-hosted
+    needs: UAT
+    steps:
+      - uses: actions/checkout@v4
+      - name: terraform init 
+        run: terraform init -backend-config=env-prod/state.tfvars      
