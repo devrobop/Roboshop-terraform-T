@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: QA
     steps:
-      - uses: echo just a dummy job
+      - uses: echo just a dummy 
       
   PROD:
     runs-on: self-hosted
@@ -25,4 +25,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: terraform init 
-        run: terraform init -backend-config=env-prod/state.tfvars      
+        run: terraform init -backend-config=env-prod/state.tfvars   
