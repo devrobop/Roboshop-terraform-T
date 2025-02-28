@@ -77,10 +77,10 @@ apps = {
   }
 
   shipping = {
-    subnet_ref       = "app"
-    instance_type    = "t3.small"
-    allow_port       = 8080
-    allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
+    subnet_ref    = "app"
+    instance_type = "t3.small"
+    allow_port    = 8080
+    allow_sg_cidr = ["10.10.4.0/24", "10.10.5.0/24"]
     allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
     capacity = {
       desired = 1
@@ -89,6 +89,7 @@ apps = {
     }
     lb_ref           = "private"
     lb_rule_priority = 4
+  }
 
   payment = {
     subnet_ref       = "app"
@@ -138,7 +139,7 @@ load_balancers = {
   private = {
     internal           = true
     load_balancer_type = "application"
-    allow_lb_sg_cidr   = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
+    allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
     subnet_ref         = "app"
     acm_https_arn      = null
     listener_port      = "80"
@@ -149,11 +150,12 @@ load_balancers = {
   public = {
     internal           = false
     load_balancer_type = "application"
-    allow_lb_sg_cidr   = ["0.0.0.0/0"]
+    allow_lb_sg_cidr = ["0.0.0.0/0"]
     subnet_ref         = "public"
     acm_https_arn      = "arn:aws:acm:us-east-1:633788536644:certificate/764c1d94-5562-48f4-be92-fca22568f53d"
     listener_port      = "443"
     listener_protocol  = "HTTPS"
     ssl_policy         = "ELBSecurityPolicy-2016-08"
+    }
   }
-}
+
