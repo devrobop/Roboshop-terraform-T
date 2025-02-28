@@ -77,16 +77,27 @@ apps = {
   }
 
   shipping = {
-@@ -83,7 +87,8 @@
+    subnet_ref       = "app"
+    instance_type    = "t3.small"
+    allow_port       = 8080
+    allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
+    allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
+    capacity = {
+      desired = 1
       max     = 1
       min     = 1
     }
     lb_ref           = "private"
     lb_rule_priority = 4
-  }
 
   payment = {
-@@ -97,60 +102,61 @@
+    subnet_ref       = "app"
+    instance_type    = "t3.small"
+    allow_port       = 8080
+    allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
+    allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
+    capacity = {
+      desired = 1
       max     = 1
       min     = 1
     }
