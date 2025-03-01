@@ -14,99 +14,99 @@ vpc = {
   default_vpc_cidr   = "172.31.0.0/16"
 }
 
-apps = {
+# apps = {
 
-  frontend = {
-    subnet_ref       = "web"
-    instance_type    = "t3.small"
-    allow_port       = 80
-    allow_sg_cidr    = ["10.10.0.0/24", "10.10.1.0/24"]
-    allow_lb_sg_cidr = ["0.0.0.0/0"]
-    capacity = {
-      desired = 1
-      max     = 1
-      min     = 1
-    }
-    lb_ref           = "public"
-    lb_rule_priority = 1
-  }
+#   frontend = {
+#     subnet_ref       = "web"
+#     instance_type    = "t3.small"
+#     allow_port       = 80
+#     allow_sg_cidr    = ["10.10.0.0/24", "10.10.1.0/24"]
+#     allow_lb_sg_cidr = ["0.0.0.0/0"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#     lb_ref           = "public"
+#     lb_rule_priority = 1
+#   }
 
-  catalogue = {
-    subnet_ref       = "app"
-    instance_type    = "t3.small"
-    allow_port       = 8080
-    allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
-    allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
-    capacity = {
-      desired = 1
-      max     = 1
-      min     = 1
-    }
-    lb_ref           = "private"
-    lb_rule_priority = 1
-  }
+#   catalogue = {
+#     subnet_ref       = "app"
+#     instance_type    = "t3.small"
+#     allow_port       = 8080
+#     allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
+#     allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#     lb_ref           = "private"
+#     lb_rule_priority = 1
+#   }
 
-  cart = {
-    subnet_ref       = "app"
-    instance_type    = "t3.small"
-    allow_port       = 8080
-    allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
-    allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
-    capacity = {
-      desired = 1
-      max     = 1
-      min     = 1
-    }
-    lb_ref           = "private"
-    lb_rule_priority = 2
-  }
+#   cart = {
+#     subnet_ref       = "app"
+#     instance_type    = "t3.small"
+#     allow_port       = 8080
+#     allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
+#     allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#     lb_ref           = "private"
+#     lb_rule_priority = 2
+#   }
 
-  user = {
-    subnet_ref       = "app"
-    instance_type    = "t3.small"
-    allow_port       = 8080
-    allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
-    allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
-    capacity = {
-      desired = 1
-      max     = 1
-      min     = 1
-    }
-    lb_ref           = "private"
-    lb_rule_priority = 3
-  }
+#   user = {
+#     subnet_ref       = "app"
+#     instance_type    = "t3.small"
+#     allow_port       = 8080
+#     allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
+#     allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#     lb_ref           = "private"
+#     lb_rule_priority = 3
+#   }
 
-  shipping = {
-    subnet_ref    = "app"
-    instance_type = "t3.small"
-    allow_port    = 8080
-    allow_sg_cidr = ["10.10.4.0/24", "10.10.5.0/24"]
-    allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
-    capacity = {
-      desired = 1
-      max     = 1
-      min     = 1
-    }
-    lb_ref           = "private"
-    lb_rule_priority = 4
-  }
+#   shipping = {
+#     subnet_ref    = "app"
+#     instance_type = "t3.small"
+#     allow_port    = 8080
+#     allow_sg_cidr = ["10.10.4.0/24", "10.10.5.0/24"]
+#     allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#     lb_ref           = "private"
+#     lb_rule_priority = 4
+#   }
 
-  payment = {
-    subnet_ref       = "app"
-    instance_type    = "t3.small"
-    allow_port       = 8080
-    allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
-    allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
-    capacity = {
-      desired = 1
-      max     = 1
-      min     = 1
-    }
-    lb_ref           = "private"
-    lb_rule_priority = 5
-  }
+#   payment = {
+#     subnet_ref       = "app"
+#     instance_type    = "t3.small"
+#     allow_port       = 8080
+#     allow_sg_cidr    = ["10.10.4.0/24", "10.10.5.0/24"]
+#     allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24", "10.10.4.0/24", "10.10.5.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#     lb_ref           = "private"
+#     lb_rule_priority = 5
+#   }
 
-}
+# }
 
 db = {
   mongo = {
