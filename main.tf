@@ -13,59 +13,28 @@ module "vpc" {
   default_vpc_cidr   = var.vpc["default_vpc_cidr"]
 }
 
-module "apps" {
-  depends_on = [module.db, module.vpc]
 
-  source = "./modules/asg"
+# module "db" {
+#   depends_on = [module.vpc]
+#   source     = "./modules/ec2"
 
-  for_each         = var.apps
-  name             = each.key
-  instance_type    = each.value["instance_type"]
-  allow_port       = each.value["allow_port"]
-  allow_sg_cidr    = each.value["allow_sg_cidr"]
-  subnet_ids       = module.vpc.subnets[each.value["subnet_ref"]]
-  capacity         = each.value["capacity"]
-  vpc_id           = module.vpc.vpc_id
-  env              = var.env
-  bastion_nodes    = var.bastion_nodes
-  asg              = true
-  vault_token      = var.vault_token
-  zone_id          = var.zone_id
-  dns_name         = module.load-balancers[each.value["lb_ref"]].dns_name
-  listener_arn     = module.load-balancers[each.value["lb_ref"]].listener_arn
-  lb_rule_priority = each.value["lb_rule_priority"]
-}
+#   for_each      = var.db
+#   name          = each.key
+#   instance_type = each.value["instance_type"]
+#   allow_port    = each.value["allow_port"]
+#   allow_sg_cidr = each.value["allow_sg_cidr"]
+#   subnet_ids    = module.vpc.subnets[each.value["subnet_ref"]]
+#   vpc_id        = module.vpc.vpc_id
+#   env           = var.env
+#   bastion_nodes = var.bastion_nodes
+#   vault_token   = var.vault_token
+#   zone_id       = var.zone_id
+# }
 
-module "db" {
-  depends_on = [module.vpc]
-  source     = "./modules/ec2"
-
-  for_each      = var.db
-  name          = each.key
-  instance_type = each.value["instance_type"]
-  allow_port    = each.value["allow_port"]
-  allow_sg_cidr = each.value["allow_sg_cidr"]
-  subnet_ids    = module.vpc.subnets[each.value["subnet_ref"]]
-  vpc_id        = module.vpc.vpc_id
+module "eks" {
+  depends_on    = [module.vpc]
+  source        = "./modules/eks" 
   env           = var.env
-  bastion_nodes = var.bastion_nodes
-  vault_token   = var.vault_token
-  zone_id       = var.zone_id
-}
-
-module "load-balancers" {
-  source = "./modules/load-balancer"
-
-  for_each           = var.load_balancers
-  name               = each.key
-  allow_lb_sg_cidr   = each.value["allow_lb_sg_cidr"]
-  internal           = each.value["internal"]
-  load_balancer_type = each.value["load_balancer_type"]
-  env                = var.env
-  vpc_id             = module.vpc.vpc_id
-  subnet_ids         = module.vpc.subnets[each.value["subnet_ref"]]
-  acm_https_arn      = each.value["acm_https_arn"]
-  listener_port      = each.value["listener_port"]
-  listener_protocol  = each.value["listener_protocol"]
-  ssl_policy         = each.value["ssl_policy"]
+  subent_ids    = module.vpc.app_subnets_ids
+  node_groups   = var.eks["node_groups"]
 }
