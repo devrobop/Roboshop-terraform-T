@@ -44,6 +44,9 @@ vpc = {
 
 
 eks = {
+
+  eks_version = "1.30"
+
   node_groups = {
     main-spot = {
       max_size       = 3

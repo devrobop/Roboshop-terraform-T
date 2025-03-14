@@ -32,7 +32,7 @@ module "vpc" {
 # }
 
 module "eks" {
-  depends_on = [ module.vpc ]
+  depends_on    = [ module.vpc ]
   source        = "./modules/eks" 
   env           = var.env
   subent_ids    = module.vpc.app_subnet_ids
