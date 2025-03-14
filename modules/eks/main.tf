@@ -24,8 +24,8 @@ resource "aws_eks_node_group" "main" {
 
   scaling_config {
     desired_size = each.value["min_size"]
-    max_size     = each.key["max_size"]
-    min_size     = each.key["min_size"]
+    max_size     = each.value["max_size"]
+    min_size     = each.value["min_size"]
   }
 }
 
