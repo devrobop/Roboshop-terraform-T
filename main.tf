@@ -37,6 +37,6 @@ module "eks" {
   env           = var.env
   subent_ids    = module.vpc.app_subnet_ids
   node_groups   = var.eks["node_groups"]
-  eks_version   = var.eks ["eks_version"]
-  add_ons       = var.eks ["add_ons"] 
+  eks_version   = var.eks["eks_version"]
+  add_ons       = var.eks["add_ons"] 
 }
