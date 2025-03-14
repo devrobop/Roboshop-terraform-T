@@ -23,9 +23,9 @@ resource "aws_eks_node_group" "main" {
   capacity_type = each.value["capacity_type"]
 
   scaling_config {
-    desired_size = each.value{"min_size"}
-    max_size     = each.key{"max_size"}
-    min_size     = each.key{"min_size"}
+    desired_size = each.value["min_size"]
+    max_size     = each.key["max_size"]
+    min_size     = each.key["min_size"]
   }
 }
 
