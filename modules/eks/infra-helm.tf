@@ -4,20 +4,17 @@ resource "null_resource" "kube-config" {
   provisioner "local-exec" {
     command =<<EOF
 aws eks update-kubeconfig --name ${var.env}-eks
-EOF    
-    
+EOF
   }
 }
 
-# External secrets
+## External Secrets
 resource "helm_release" "external-secrets" {
 
-  depends_on = [null_resource.kube-config]  
-  
+  depends_on = [null_resource.kube-config]
+
   name       = "external-secrets"
-  repository = "https://charts.bitnami.com/bitnami"
+  repository = "https://charts.external-secrets.io"
   chart      = "external-secrets"
   namespace  = "kube-system"
-
-
 }
