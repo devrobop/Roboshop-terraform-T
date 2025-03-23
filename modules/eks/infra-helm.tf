@@ -4,6 +4,7 @@ resource "null_resource" "kube-config" {
   provisioner "local-exec" {
     command =<<EOF
 aws eks update-kubeconfig --name ${var.env}-eks
+kubectl apply -f /opt/vault-token.yaml
 
 EOF
   }
