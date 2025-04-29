@@ -23,7 +23,7 @@ resource "helm_release" "external-secrets" {
 }
 
 resource "null_resource" "external-secrets-store" {
-  depends_on = [helm_release.external-secrets, null_resource.kubeconfig]
+  depends_on = [helm_release.external-secrets, null_resource.kube-config]
 
   provisioner "local-exec" {
     command =<<EOF
