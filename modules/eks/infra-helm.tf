@@ -51,7 +51,7 @@ EOF
 ##  Metric server  for HPA.
  
 resource "null_resource" "metrics-server" {
-  depends_on = [null_resource.kubeconfig]
+  depends_on = [null_resource.kube-config]
 
   provisioner "local-exec" {
     command =<<EOF
