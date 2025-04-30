@@ -41,7 +41,7 @@ spec:
       auth:
         tokenSecretRef:
           name: "vault-token"
-          key: "token"
+          key: "Token"
           namespace: kube-system
 EOK
 EOF
