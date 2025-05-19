@@ -18,7 +18,7 @@ resource "helm_release" "external-secrets" {
   repository = "https://charts.external-secrets.io"
   chart      = "external-secrets"
   namespace  = "kube-system"
-  wait       = "false"
+  wait       = true
 }
 
 resource "null_resource" "external-secrets-store" {
@@ -34,7 +34,7 @@ metadata:
 spec:
   provider:
     vault:
-      server: "http://172.31.0.43:8200/"
+      server: "http://vault-internal.rdevopsb80.online:8200/"
       path: "roboshop-${var.env}"
       version: "v2"
       auth:
@@ -59,7 +59,8 @@ EOF
   }
 }
 
-## Prometheus stack
+
+## Prometheus Stack
 resource "helm_release" "prometheus-stack" {
 
   depends_on = [null_resource.kube-config]
@@ -69,5 +70,73 @@ resource "helm_release" "prometheus-stack" {
   chart      = "kube-prometheus-stack"
   namespace  = "kube-system"
   wait       = true
+
+  values = [
+    file("${path.module}/helm-configs/prometheus-stack.yaml")
+  ]
+
+  set_list {
+    name  = "grafana.ingress.hosts"
+    value = ["grafana-${var.env}.rdevopsb80.online"]
+  }
+
+  set_list {
+    name  = "prometheus.ingress.hosts"
+    value = ["prometheus-${var.env}.rdevopsb80.online"]
+  }
+
+}
+
+## Nginx ingress
+# resource "helm_release" "nginx-ingress" {
+#
+#   depends_on = [null_resource.kube-config]
+#
+#   name       = "ingress-nginx"
+#   repository = "https://kubernetes.github.io/ingress-nginx"
+#   chart      = "ingress-nginx"
+#   namespace  = "kube-system"
+#   wait       = true
+#
+#   values = [
+#     file("${path.module}/helm-configs/nginx-ingress.yaml")
+#   ]
+#
+# }
+
+
+## External DNS
+resource "helm_release" "external-dns" {
+
+  depends_on = [null_resource.kube-config]
+
+  name       = "route53-dns"
+  repository = "https://kubernetes-sigs.github.io/external-dns/"
+  chart      = "external-dns"
+  namespace  = "kube-system"
+  wait       = true
+}
+
+
+## AWS Load Balancer Controller ingress
+resource "helm_release" "aws-controller-ingress" {
+
+  depends_on = [null_resource.kube-config]
+
+  name       = "aws-ingress"
+  repository = "https://aws.github.io/eks-charts"
+  chart      = "aws-load-balancer-controller"
+  namespace  = "kube-system"
+  wait       = true
+
+  set {
+    name  = "clusterName"
+    value = aws_eks_cluster.main.name
+  }
+
+  set {
+    name  = "vpcId"
+    value = var.vpc_id
+  }
 
 }
