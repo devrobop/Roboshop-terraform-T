@@ -64,12 +64,12 @@ eks = {
 
   eks-iam-access = {
     workstation = {
-      principal_arn = "arn:aws:iam::149722329128:role/Workstation"
+      principal_arn = "arn:aws:iam::322025451539:role/Workstation"
       policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
       kubernetes_groups = []
     }
     sso-user = {
-      principal_arn     = "arn:aws:iam::149722329128:root"
+      principal_arn     = "arn:aws:iam::322025451539:root"
       policy_arn        = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
       kubernetes_groups = [] 
   }
