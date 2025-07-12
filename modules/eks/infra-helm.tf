@@ -73,14 +73,14 @@ resource "helm_release" "prometheus-stack" {
     file("${path.module}/helm-configs/prometheus-stack.yaml")
   ]
 
-  set_list {
+  set_list = {
     name  = "grafana.ingress.hosts"
-    value = ["grafana-${var.env}.rdevopsb80.online"]
+    value = ["grafana-${var.env}.devrobop.shop"]
   }
 
-  set_list {
+  set_list ={
     name  = "prometheus.ingress.hosts"
-    value = ["prometheus-${var.env}.rdevopsb80.online"]
+    value = ["prometheus-${var.env}.devrobop.shop"]
   }
 
 }
@@ -125,12 +125,12 @@ resource "helm_release" "aws-controller-ingress" {
   chart      = "aws-load-balancer-controller"
   namespace  = "kube-system"
 
-  set {
+  set = {
     name  = "clusterName"
     value = aws_eks_cluster.main.name
   }
 
-  set {
+  set = {
     name  = "vpcId"
     value = var.vpc_id
   }
