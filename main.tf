@@ -32,7 +32,7 @@ module "db" {
 }
 
 module "eks" {
-  depends_on    = [ module.vpc ]
+  depends_on    = [module.vpc]
   source        = "./modules/eks" 
   env           = var.env
   subnet_ids    = module.vpc.app_subnet_ids
@@ -40,4 +40,5 @@ module "eks" {
   eks_version   = var.eks["eks_version"]
   add_ons       = var.eks["add_ons"] 
   eks-iam-access = var.eks["eks-iam-access"]
+  vpc_id         = module.vpc.vpc_id
 }
