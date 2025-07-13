@@ -14,7 +14,7 @@ resource "helm_release" "external-secrets" {
 
   depends_on = [null_resource.kube-config]
 
-  name       = "external-secrets"
+  name       = "external-secrets1"
   repository = "https://charts.external-secrets.io"
   chart      = "external-secrets"
   namespace  = "kube-system"
@@ -64,7 +64,7 @@ resource "helm_release" "prometheus-stack" {
 
   depends_on = [null_resource.kube-config]
 
-  name       = "prometheus"
+  name       = "prometheus1"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
   namespace  = "kube-system"
