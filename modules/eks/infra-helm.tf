@@ -3,7 +3,7 @@ resource "null_resource" "kube-config" {
 
   provisioner "local-exec" {
     command = <<EOF
-aws eks update-kubeconfig --name ${var.env}-eks
+aws eks update-kubeconfig --name ${var.env}-eks --region us-east-1
 kubectl apply -f /opt/vault-token.yaml
 EOF
   }
@@ -33,7 +33,7 @@ metadata:
 spec:
   provider:
     vault:
-      server: "http://vault-internal.rdevopsb80.online:8200/"
+      server: "http://vault-internal.devrobop.shop:8200/"
       path: "roboshop-${var.env}"
       version: "v2"
       auth:
