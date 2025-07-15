@@ -49,9 +49,9 @@ eks = {
 
   node_groups = {
     main-spot = {
-      max_size       = 4
+      max_size       = 3
       min_size       = 1
-      instance_types = ["t3.medium"]
+      instance_types = ["t3.large"]
       capacity_type  = "SPOT"
     }
   }
