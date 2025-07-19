@@ -139,7 +139,7 @@ resource "null_resource" "uninstall" {
     when    = destroy
     command = <<EOF
 kubectl delete ingress prometheus-grafana -n kube-system || true
-kubectl delete ingress prometheus-kube-prometheus-prometheus -n kube-system  || true
+kubectl delete ingress prometheus-kube-prometheus-prometheus -n kube-system || true
 EOF
   }
 
