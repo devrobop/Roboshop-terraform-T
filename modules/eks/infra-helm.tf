@@ -138,8 +138,8 @@ resource "null_resource" "uninstall" {
   provisioner "local-exec" {
     when    = destroy
     command = <<EOF
-kubectl delete ingress prometheus-grafana -n kube-system
-kubectl delete ingress prometheus-kube-prometheus-prometheus -n kube-system
+kubectl delete ingress prometheus-grafana -n kube-system || true
+kubectl delete ingress prometheus-kube-prometheus-prometheus -n kube-system  || true
 EOF
   }
 
