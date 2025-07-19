@@ -12,14 +12,13 @@ EOF
 ## External Secrets
 resource "helm_release" "external-secrets" {
 
-  depends_on = [null_resource.kube-config]
+  depends_on = [null_resource.kube-config,helm_release.aws-controller-ingress]
 
   name       = "external-secrets1"
   repository = "https://charts.external-secrets.io"
   chart      = "external-secrets"
   namespace  = "kube-system"
 }
-
 resource "null_resource" "external-secrets-store" {
   depends_on = [helm_release.external-secrets, null_resource.kube-config]
 
