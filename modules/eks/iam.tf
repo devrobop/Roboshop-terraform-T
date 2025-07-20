@@ -131,7 +131,7 @@ resource "aws_iam_role" "aws-ingress-controller-role" {
         "Effect" : "Allow",
         "Principal" : {
           "Service" : [
-            "pods.eks.amazonaws.com"
+            "pods.eks.amazonaws.com",
             "ec2:DescribeRouteTables",
             "ec2:DescribeSubnets",
             "ec2:DescribeVpcs",
