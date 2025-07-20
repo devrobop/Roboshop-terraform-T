@@ -396,4 +396,4 @@ resource "aws_eks_pod_identity_association" "aws-ingress-controller-role" {
   namespace       = "kube-system"
   service_account = "aws-ingress-aws-load-balancer-controller"
   role_arn        = aws_iam_role.aws-ingress-controller-role.arn
-}}
+}
