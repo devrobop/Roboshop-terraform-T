@@ -132,6 +132,13 @@ resource "aws_iam_role" "aws-ingress-controller-role" {
         "Principal" : {
           "Service" : [
             "pods.eks.amazonaws.com"
+            "ec2:DescribeRouteTables",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:CreateTags",
+            "elasticloadbalancing:*"
           ]
         },
         "Action" : [
