@@ -131,14 +131,7 @@ resource "aws_iam_role" "aws-ingress-controller-role" {
         "Effect" : "Allow",
         "Principal" : {
           "Service" : [
-            "pods.eks.amazonaws.com",
-            "ec2:DescribeRouteTables",
-            "ec2:DescribeSubnets",
-            "ec2:DescribeVpcs",
-            "ec2:DescribeSecurityGroups",
-            "ec2:DescribeNetworkInterfaces",
-            "ec2:CreateTags",
-            "elasticloadbalancing:*"
+            "pods.eks.amazonaws.com"
           ]
         },
         "Action" : [
@@ -403,4 +396,4 @@ resource "aws_eks_pod_identity_association" "aws-ingress-controller-role" {
   namespace       = "kube-system"
   service_account = "aws-ingress-aws-load-balancer-controller"
   role_arn        = aws_iam_role.aws-ingress-controller-role.arn
-}
+}}
